@@ -15,16 +15,69 @@ const tableData = [
     totalCarpetArea: "6,59,412",
   },
 ];
-// This could be inlined into SubRowAsync, this this lets you reuse it across tables
 function SubRows({ row, rowProps, visibleColumns, tableData }) {
   return (
     <>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr className="sub-row">
+        <td colSpan={5} className="sub-row-data">
+          <div className="sub-row-cards-container">
+            <div className="sub-row-card">
+              <div className="sub-row-card-title">Project Details</div>
+              <div className="sub-row-card-item">
+                <div className="sub-row-card-item-name">FSI/FAR(sq.ft)</div>
+                <div className="sub-row-card-item-value">3,00,000</div>
+              </div>
+              <div className="sub-row-card-item">
+                <div className="sub-row-card-item-name">
+                  Smallest Unit Size(sqft.)
+                </div>
+                <div className="sub-row-card-item-value">3,00,000</div>
+              </div>
+              <div className="sub-row-card-item">
+                <div className="sub-row-card-item-name">
+                  Largest Unit Size(sqft.)
+                </div>
+                <div className="sub-row-card-item-value">3,00,000</div>
+              </div>
+              <div className="sub-row-card-item">
+                <div className="sub-row-card-item-name">Total Units</div>
+                <div className="sub-row-card-item-value">3,00,000</div>
+              </div>
+              <div className="sub-row-card-item">
+                <div className="sub-row-card-item-name">
+                  Number of Buildings
+                </div>
+                <div className="sub-row-card-item-value">3,00,000</div>
+              </div>
+            </div>
+            <div className="sub-row-card">
+              <div className="sub-row-card-title">Promoter Details</div>
+              <div className="sub-row-card-promoter-item">
+                <div className="sub-row-card-promoter-item-company">
+                  ABC Pvt. Ltd.(Company)
+                </div>
+                <div className="sub-row-card-promoter-item-contact">
+                  Contact - 02261334263
+                </div>
+              </div>
+              <div className="sub-row-card-promoter-item">
+                <div className="sub-row-card-promoter-item-company">
+                  ABC Pvt. Ltd.(Company)
+                </div>
+                <div className="sub-row-card-promoter-item-contact">
+                  Contact - 02261334263
+                </div>
+              </div>
+            </div>
+            <div className="sub-row-card">
+              <div className="sub-row-card-title">Key Persons</div>
+              <div className="sub-row-card-key-person">
+                1 - Authorzed Signatory
+              </div>
+              <div className="sub-row-card-key-person">2 - Rahendra Lodha</div>
+            </div>
+          </div>
+        </td>
       </tr>
     </>
   );
@@ -43,8 +96,7 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
       columns: userColumns,
       data,
     },
-    useExpanded // We can useExpanded to track the expanded state
-    // for sub components too!
+    useExpanded
   );
 
   return (
@@ -74,7 +126,6 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
             prepareRow(row);
             const rowProps = row.getRowProps();
             return (
-              // Use a React.Fragment here so the table markup is still valid
               <React.Fragment key={rowProps.key}>
                 <tr {...rowProps} className="tbody-row">
                   {row.cells.map((cell) => {
@@ -83,7 +134,6 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
                     );
                   })}
                 </tr>
-                {/* We could pass anything into this */}
                 {row.isExpanded &&
                   renderRowSubComponent({ row, rowProps, visibleColumns })}
               </React.Fragment>
@@ -99,13 +149,9 @@ function TableComponent() {
   const columns = React.useMemo(
     () => [
       {
-        // Make an expander cell
-        Header: () => null, // No header
-        id: "expander", // It needs an ID
+        Header: () => null,
+        id: "expander",
         Cell: ({ row }) => (
-          // Use Cell to render an expander for each row.
-          // We can use the getToggleRowExpandedProps prop-getter
-          // to build the expander.
           <span {...row.getToggleRowExpandedProps()}>
             {row.isExpanded ? (
               <svg
@@ -140,13 +186,11 @@ function TableComponent() {
             )}
           </span>
         ),
-        // We can override the cell renderer with a SubCell to be used with an expanded row
-        SubCell: () => null, // No expander on an expanded row
+        SubCell: () => null,
       },
       {
         Header: "Project Name",
         accessor: (d) => d.projectName,
-        SubCell: (cellProps) => <>🥳 {cellProps.value} 🎉</>,
       },
       {
         Header: "Project Address",
@@ -164,7 +208,6 @@ function TableComponent() {
     []
   );
 
-  // Create a function that will render our row sub components
   const renderRowSubComponent = React.useCallback(
     ({ row, rowProps, visibleColumns }) => (
       <SubRows
@@ -181,10 +224,6 @@ function TableComponent() {
     <Table
       columns={columns}
       data={tableData}
-      // We added this as a prop for our table component
-      // Remember, this is not part of the React Table API,
-      // it's merely a rendering option we created for
-      // ourselves
       renderRowSubComponent={renderRowSubComponent}
     />
   );

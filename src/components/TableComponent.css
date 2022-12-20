@@ -61,3 +61,70 @@ td:last-child {
 .col5 {
   width: auto;
 }
+
+.sub-row {
+  background: #d9dddf;
+}
+.sub-row-data {
+  width: 100%;
+}
+.sub-row-cards-container {
+  padding: 0 2px;
+  margin: -11px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  align-items: flex-start;
+}
+.sub-row-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 11px 23px;
+  width: 320px;
+}
+.sub-row-card-title {
+  margin-bottom: 22px;
+  text-align: left;
+}
+.sub-row-card-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+.sub-row-card-item-name {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
+.sub-row-card-item-value {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
+
+.sub-row-card-promoter-item {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+  text-align: left;
+  border-bottom: 1px solid #e6e6e6;
+}
+.sub-row-card-promoter-item:last-child {
+  border-bottom: 0;
+}
+.sub-row-card-promoter-item > div {
+  margin: 15px 0;
+}
+
+.sub-row-card-key-person {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
