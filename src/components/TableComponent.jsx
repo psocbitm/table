@@ -1,20 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useExpanded, useTable } from "react-table";
 import "./TableComponent.css";
-const tableData = [
-  {
-    projectName: "Lodha Amara - Tower 1-5, 7-19",
-    projectAddress: "Ghatkopar E, Mumbai - 400098",
-    projectType: "Residential",
-    totalCarpetArea: "2,75,000",
-  },
-  {
-    projectName: "Runwal Bliss Amara - Tower A, E-F-X24-29",
-    projectAddress: "Kanjurmarg E, Mumbai - 400098",
-    projectType: "Residential",
-    totalCarpetArea: "6,59,412",
-  },
-];
+import BlurredComponent from "./BlurredComponent";
+
 function SubRows({ row, rowProps, visibleColumns, tableData }) {
   return (
     <>
@@ -122,7 +110,7 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
         </thead>
 
         <tbody {...getTableBodyProps()} className="tbody">
-          {rows.map((row, i) => {
+          {rows.slice(0, 4).map((row, i) => {
             prepareRow(row);
             const rowProps = row.getRowProps();
             return (
@@ -139,13 +127,18 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
               </React.Fragment>
             );
           })}
+          <tr>
+            <td colSpan={5} className="tbody-row">
+              <BlurredComponent />
+            </td>
+          </tr>
         </tbody>
       </table>
     </>
   );
 }
 
-function TableComponent() {
+function TableComponent({ tableData }) {
   const columns = React.useMemo(
     () => [
       {
@@ -207,7 +200,6 @@ function TableComponent() {
     ],
     []
   );
-
   const renderRowSubComponent = React.useCallback(
     ({ row, rowProps, visibleColumns }) => (
       <SubRows
@@ -217,7 +209,7 @@ function TableComponent() {
         data={tableData}
       />
     ),
-    []
+    [tableData]
   );
 
   return (

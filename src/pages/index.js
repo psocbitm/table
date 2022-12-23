@@ -1,10 +1,18 @@
 import * as React from "react";
+import InputComponent from "../components/InputComponent";
 import TableComponent from "../components/TableComponent";
-
+import { tableData } from "../tableData.js";
 const IndexPage = () => {
   return (
     <>
-      <TableComponent />
+      {/* <TableComponent tableData={tableData} /> */}
+      <InputComponent
+        borderRadius={"R8"}
+        border={"B1"}
+        shadow={"S1"}
+        buttonBorderRadius={"R5"}
+        disabled={false}
+      />
     </>
   );
 };
