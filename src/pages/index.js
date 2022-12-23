@@ -7,11 +7,14 @@ const IndexPage = () => {
     <>
       {/* <TableComponent tableData={tableData} /> */}
       <InputComponent
-        borderRadius={"R8"}
+        inputFieldRadius={"R8"}
         border={"B1"}
-        shadow={"S1"}
         buttonBorderRadius={"R5"}
         disabled={false}
+        helperText={{
+          text: "Helper Text",
+          type: "",
+        }}
       />
     </>
   );
