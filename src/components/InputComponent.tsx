@@ -3,17 +3,16 @@ import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 
 type InputProps = {
-  inputFieldRadius: string
-  border: string
-  buttonBorderRadius: string
+  inputFieldRadius: string;
+  border: string;
+  buttonBorderRadius: string;
   helperText: {
-    text: string
-    type: string
-  }
-  disabled: boolean
-}
-type DeviceType = { attributes: { label: string, width: string } }
-
+    text: string;
+    type: string;
+  };
+  disabled: boolean;
+};
+type DeviceType = { attributes: { label: string; width: string } };
 
 const InputComponent = ({
   inputFieldRadius,
@@ -122,7 +121,7 @@ const InputComponent = ({
       width: device.attributes.width,
     };
   });
-  const borderPresets = styles.Strapi.borderPresets.data.map((border) => {
+  const borderPresets = styles.Strapi.borderPresets.data.map((border: any) => {
     return {
       label: border.attributes.label,
       style: border.attributes.style,
@@ -130,14 +129,14 @@ const InputComponent = ({
     };
   });
 
-  const breakpoints = styles.Strapi.breakpoints.data.map((breakpoint) => {
+  const breakpoints = styles.Strapi.breakpoints.data.map((breakpoint: any) => {
     return {
       label: breakpoint.attributes.label,
       width: breakpoint.attributes.width,
     };
   });
 
-  const colorPalettes = styles.Strapi.colorPalettes.data.map((color) => {
+  const colorPalettes = styles.Strapi.colorPalettes.data.map((color: any) => {
     return {
       label: color.attributes.label,
       mode: color.attributes.mode,
@@ -151,14 +150,16 @@ const InputComponent = ({
     };
   });
 
-  const radiusPresets = styles.Strapi.radiusPresets.data.map((radius: { attributes: { label: string, value: string } }) => {
-    return {
-      label: radius.attributes.label,
-      value: radius.attributes.value,
-    };
-  });
+  const radiusPresets = styles.Strapi.radiusPresets.data.map(
+    (radius: { attributes: { label: string; value: string } }) => {
+      return {
+        label: radius.attributes.label,
+        value: radius.attributes.value,
+      };
+    }
+  );
 
-  const textstyles = styles.Strapi.textstyles.data.map((textstyle) => {
+  const textstyles = styles.Strapi.textstyles.data.map((textstyle: any) => {
     return {
       label: textstyle.attributes.label,
       fontfamily: textstyle.attributes.fontfamily,
@@ -183,31 +184,37 @@ const InputComponent = ({
     }
 
     /* Data from strapi */
-    border: ${borderPresets.find((item) => item.label === border).width}
-      ${borderPresets.find((item) => item.label === border).style}
+    border: ${borderPresets.find((item: any) => item.label === border).width}
+      ${borderPresets.find((item: any) => item.label === border).style}
       ${colorPalettes
-      .find((item) => item.neutral.find((item) => item.label === "N50"))
-      .neutral.find((item) => item.label === "N50").code};
+        .find((item: any) =>
+          item.neutral.find((item: any) => item.label === "N50")
+        )
+        .neutral.find((item: any) => item.label === "N50").code};
 
     :focus-within {
       border-color: ${colorPalettes
-      .find((item) => item.primary.find((item) => item.label === "P100"))
-      .primary.find((item) => item.label === "P100").code};
+        .find((item: any) =>
+          item.primary.find((item: any) => item.label === "P100")
+        )
+        .primary.find((item: any) => item.label === "P100").code};
     }
 
     border-radius: ${styles.Strapi.radiusPresets.data.find(
-        (item) => item.attributes.label === inputFieldRadius
-      ).attributes.value};
+      (item: any) => item.attributes.label === inputFieldRadius
+    ).attributes.value};
 
-    @media (max-width: ${devices.find((device) => device.label === "laptop")
-      .width}) {
+    @media (max-width: ${devices.find(
+        (device: any) => device.label === "laptop"
+      ).width}) {
       max-width: 320px;
       min-width: 280px;
       height: 56px;
     }
 
-    @media (max-width: ${devices.find((device) => device.label === "mobile")
-      .width}) {
+    @media (max-width: ${devices.find(
+        (device: any) => device.label === "mobile"
+      ).width}) {
       max-width: 256px;
       min-width: 200px;
       height: 44px;
@@ -223,61 +230,82 @@ const InputComponent = ({
     width: 100%;
     background-color: transparent;
     /* Data from strapi */
-    color: ${colorPalettes
-      .find((item) => item.neutral.find((item) => item.label === "N50"))
-      .neutral.find((item) => item.label === "N50").code
+    color: ${
+      colorPalettes
+        .find((item: any) =>
+          item.neutral.find((item: any) => item.label === "N50")
+        )
+        .neutral.find((item: any) => item.label === "N50").code
     };
-    font-family: ${textstyles.find((item) => item.label === "H6-desktop").fontfamily
+    font-family: ${
+      textstyles.find((item: any) => item.label === "H6-desktop").fontfamily
     }};
 
-    font-size: ${textstyles.find((item) => item.label === "H6-desktop").fontsize
+    font-size: ${
+      textstyles.find((item: any) => item.label === "H6-desktop").fontsize
     }px;
-    font-weight: ${textstyles.find((item) => item.label === "H6-desktop").fontweight
+    font-weight: ${
+      textstyles.find((item: any) => item.label === "H6-desktop").fontweight
     };
 
     :placeholder {
-      font-size: ${textstyles.find((item) => item.label === "H7-desktop").fontsize
-    }px;
-      line-height: ${textstyles.find((item) => item.label === "H7-desktop").line_height
-    }; 
+      font-size: ${
+        textstyles.find((item: any) => item.label === "H7-desktop").fontsize
+      }px;
+      line-height: ${
+        textstyles.find((item: any) => item.label === "H7-desktop").line_height
+      }; 
     }
 
   
     
 
-    @media (max-width: ${devices.find((device) => device.label === "laptop").width
+    @media (max-width: ${
+      devices.find((device: any) => device.label === "laptop").width
     }) {
       padding-left: calc(20px - 4px);
-      font-size: ${textstyles.find((item) => item.label === "H6-laptop").fontsize
-    }px;
-      line-height: ${textstyles.find((item) => item.label === "H6-laptop").line_height
-    }}px;
+      font-size: ${
+        textstyles.find((item: any) => item.label === "H6-laptop").fontsize
+      }px;
+      line-height: ${
+        textstyles.find((item: any) => item.label === "H6-laptop").line_height
+      }}px;
       :placeholder {
-        font-size: ${textstyles.find((item) => item.label === "H7-laptop").fontsize
-    }px;
-        line-height: ${textstyles.find((item) => item.label === "H7-laptop").line_height
-    }px;
+        font-size: ${
+          textstyles.find((item: any) => item.label === "H7-laptop").fontsize
+        }px;
+        line-height: ${
+          textstyles.find((item: any) => item.label === "H7-laptop").line_height
+        }px;
       }
       :hover{
-        color: ${colorPalettes
-      .find((item) => item.neutral.find((item) => item.label === "N50"))
-      .neutral.find((item) => item.label === "N50").code
-    };
+        color: ${
+          colorPalettes
+            .find((item: any) =>
+              item.neutral.find((item: any) => item.label === "N50")
+            )
+            .neutral.find((item: any) => item.label === "N50").code
+        };
       }
     }
 
-    @media (max-width: ${devices.find((device) => device.label === "mobile").width
+    @media (max-width: ${
+      devices.find((device: any) => device.label === "mobile").width
     }) {
       padding-left: calc(20px - 4px);
-      font-size: ${textstyles.find((item) => item.label === "H6-mobile").fontsize
-    }px;
-      line-height: ${textstyles.find((item) => item.label === "H6-mobile").line_height
-    }}px;
+      font-size: ${
+        textstyles.find((item: any) => item.label === "H6-mobile").fontsize
+      }px;
+      line-height: ${
+        textstyles.find((item: any) => item.label === "H6-mobile").line_height
+      }}px;
       :placeholder {
-        font-size: ${textstyles.find((item) => item.label === "H7-mobile").fontsize
-    }px;
-        line-height: ${textstyles.find((item) => item.label === "H7-mobile").line_height
-    }px;
+        font-size: ${
+          textstyles.find((item: any) => item.label === "H7-mobile").fontsize
+        }px;
+        line-height: ${
+          textstyles.find((item: any) => item.label === "H7-mobile").line_height
+        }px;
       }
 
     }
@@ -295,42 +323,50 @@ const InputComponent = ({
 
     /* Data from strapi */
     border-radius: ${styles.Strapi.radiusPresets.data.find(
-    (item) => item.attributes.label === buttonBorderRadius
-  ).attributes.value};
+      (item: any) => item.attributes.label === buttonBorderRadius
+    ).attributes.value};
     background-color: ${colorPalettes
-      .find((item) => item.primary.find((item) => item.label === "P100"))
-      .primary.find((item) => item.label === "P100").code};
-    font-weight: ${textstyles.find((item) => item.label === "H6-desktop")
+      .find((item: any) =>
+        item.primary.find((item: any) => item.label === "P100")
+      )
+      .primary.find((item: any) => item.label === "P100").code};
+    font-weight: ${textstyles.find((item: any) => item.label === "H6-desktop")
       .fontweight};
-    font-size: ${textstyles.find((item) => item.label === "H6-desktop")
+    font-size: ${textstyles.find((item: any) => item.label === "H6-desktop")
       .fontsize}px;
-    line-height: ${textstyles.find((item) => item.label === "H6-desktop")
+    line-height: ${textstyles.find((item: any) => item.label === "H6-desktop")
       .line_height}px;
     color: ${colorPalettes
-      .find((item) => item.neutral.find((item) => item.label === "N0"))
-      .neutral.find((item) => item.label === "N0").code};
+      .find((item: any) =>
+        item.neutral.find((item: any) => item.label === "N0")
+      )
+      .neutral.find((item: any) => item.label === "N0").code};
     :active {
       background-color: ${colorPalettes
-      .find((item) => item.primary.find((item) => item.label === "P120"))
-      .primary.find((item) => item.label === "P120").code};
+        .find((item: any) =>
+          item.primary.find((item: any) => item.label === "P120")
+        )
+        .primary.find((item: any) => item.label === "P120").code};
     }
 
-    @media (max-width: ${devices.find((device) => device.label === "laptop")
-      .width}) {
-      font-size: ${textstyles.find((item) => item.label === "H6-laptop")
-      .fontsize}px;
+    @media (max-width: ${devices.find(
+        (device: any) => device.label === "laptop"
+      ).width}) {
+      font-size: ${textstyles.find((item: any) => item.label === "H6-laptop")
+        .fontsize}px;
 
-      line-height: ${textstyles.find((item) => item.label === "H6-laptop")
-      .line_height}px;
+      line-height: ${textstyles.find((item: any) => item.label === "H6-laptop")
+        .line_height}px;
       min-width: 100px;
     }
 
-    @media (max-width: ${devices.find((device) => device.label === "mobile")
-      .width}) {
-      font-size: ${textstyles.find((item) => item.label === "H6-mobile")
-      .fontsize}px;
-      line-height: ${textstyles.find((item) => item.label === "H6-mobile")
-      .line_height}px;
+    @media (max-width: ${devices.find(
+        (device: any) => device.label === "mobile"
+      ).width}) {
+      font-size: ${textstyles.find((item: any) => item.label === "H6-mobile")
+        .fontsize}px;
+      line-height: ${textstyles.find((item: any) => item.label === "H6-mobile")
+        .line_height}px;
       min-width: 88px;
     }
   `;
@@ -338,33 +374,40 @@ const InputComponent = ({
   const StyledHelperText = styled.div`
     font-family: "Lexend";
     font-style: normal;
-    font-weight: ${textstyles.find((item) => item.label === "H8-desktop")
+    font-weight: ${textstyles.find((item: any) => item.label === "H8-desktop")
       .fontweight};
-    font-size: ${textstyles.find((item) => item.label === "H8-desktop")
+    font-size: ${textstyles.find((item: any) => item.label === "H8-desktop")
       .fontsize}px;
-    line-height: ${textstyles.find((item) => item.label === "H8-desktop")
+    line-height: ${textstyles.find((item: any) => item.label === "H8-desktop")
       .line_height}px;
     color: ${helperText
       ? helperText.type === "error"
         ? colorPalettes
-          .find((item) => item.error.find((item) => item.label === "E100"))
-          .error.find((item) => item.label === "E100").code
+            .find((item: any) =>
+              item.error.find((item: any) => item.label === "E100")
+            )
+            .error.find((item: any) => item.label === "E100").code
         : helperText.type === "success"
-          ? colorPalettes
-            .find((item) => item.success.find((item) => item.label === "S100"))
-            .success.find((item) => item.label === "S100").code
-          : colorPalettes
+        ? colorPalettes
+            .find((item: any) =>
+              item.success.find((item: any) => item.label === "S100")
+            )
+            .success.find((item: any) => item.label === "S100").code
+        : colorPalettes
 
-            .find((item) => item.neutral.find((item) => item.label === "N25"))
-            .neutral.find((item) => item.label === "N25").code
+            .find((item: any) =>
+              item.neutral.find((item: any) => item.label === "N25")
+            )
+            .neutral.find((item: any) => item.label === "N25").code
       : ""};
 
-    @media (max-width: ${devices.find((device) => device.label === "laptop")
-      .width}) {
-      font-size: ${textstyles.find((item) => item.label === "H8-laptop")
-      .fontsize}px;
-      line-height: ${textstyles.find((item) => item.label === "H8-laptop")
-      .line_height}px;
+    @media (max-width: ${devices.find(
+        (device: any) => device.label === "laptop"
+      ).width}) {
+      font-size: ${textstyles.find((item: any) => item.label === "H8-laptop")
+        .fontsize}px;
+      line-height: ${textstyles.find((item: any) => item.label === "H8-laptop")
+        .line_height}px;
     }
   `;
 
