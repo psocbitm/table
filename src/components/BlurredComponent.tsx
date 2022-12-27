@@ -1,6 +1,7 @@
 import React from "react";
 import "./BlurredComponent.css";
 import { StaticImage } from "gatsby-plugin-image";
+
 function BlurredComponent() {
   return (
     <div className="wrapper">

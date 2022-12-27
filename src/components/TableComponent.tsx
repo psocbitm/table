@@ -3,7 +3,36 @@ import { useExpanded, useTable } from "react-table";
 import "./TableComponent.css";
 import BlurredComponent from "./BlurredComponent";
 
-function SubRows({ row, rowProps, visibleColumns, tableData }) {
+type SubRowsProps = {
+  row: any;
+  rowProps: any;
+  visibleColumns: any;
+  tableData?: any;
+  data: any;
+};
+
+type TableProps = {
+  columns: any;
+  data: any;
+  renderRowSubComponent: any;
+};
+
+type TableComponentProps = {
+  tableData: any;
+};
+
+type RenderRowSubComponentProps = {
+  row: any;
+  rowProps: any;
+  visibleColumns: any;
+};
+
+const SubRows = ({
+  row,
+  rowProps,
+  visibleColumns,
+  tableData,
+}: SubRowsProps) => {
   return (
     <>
       <tr className="sub-row">
@@ -69,9 +98,13 @@ function SubRows({ row, rowProps, visibleColumns, tableData }) {
       </tr>
     </>
   );
-}
+};
 
-function Table({ columns: userColumns, data, renderRowSubComponent }) {
+const Table = ({
+  columns: userColumns,
+  data,
+  renderRowSubComponent,
+}: TableProps) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -110,13 +143,13 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
         </thead>
 
         <tbody {...getTableBodyProps()} className="tbody">
-          {rows.slice(0, 4).map((row, i) => {
+          {rows.slice(0, 4).map((row: any, i) => {
             prepareRow(row);
             const rowProps = row.getRowProps();
             return (
               <React.Fragment key={rowProps.key}>
                 <tr {...rowProps} className="tbody-row">
-                  {row.cells.map((cell) => {
+                  {row.cells.map((cell: any) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     );
@@ -136,15 +169,15 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
       </table>
     </>
   );
-}
+};
 
-function TableComponent({ tableData }) {
+const TableComponent = ({ tableData }: TableComponentProps) => {
   const columns = React.useMemo(
     () => [
       {
         Header: () => null,
         id: "expander",
-        Cell: ({ row }) => (
+        Cell: ({ row }: any) => (
           <span {...row.getToggleRowExpandedProps()}>
             {row.isExpanded ? (
               <svg
@@ -183,7 +216,7 @@ function TableComponent({ tableData }) {
       },
       {
         Header: "Project Name",
-        accessor: (d) => d.projectName,
+        accessor: (d: any) => d.projectName,
       },
       {
         Header: "Project Address",
@@ -201,7 +234,7 @@ function TableComponent({ tableData }) {
     []
   );
   const renderRowSubComponent = React.useCallback(
-    ({ row, rowProps, visibleColumns }) => (
+    ({ row, rowProps, visibleColumns }: RenderRowSubComponentProps) => (
       <SubRows
         row={row}
         rowProps={rowProps}
@@ -219,6 +252,6 @@ function TableComponent({ tableData }) {
       renderRowSubComponent={renderRowSubComponent}
     />
   );
-}
+};
 
 export default TableComponent;
